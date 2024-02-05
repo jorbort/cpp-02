@@ -34,3 +34,32 @@ void Fixed::setRawBits(int const bit)
 {
 	this->RawBits = bit;
 }
+// hasta aqui todo igual al ex00
+
+Fixed::Fixed(const int integer)
+{
+	std::cout << "Int constructor called" << std::endl;
+	this->RawBits = (integer << Fixed::bits);
+}
+
+Fixed::Fixed(const float floating_point)
+{
+	std::cout << "Float constructor called" << std::endl;
+	this->RawBits = std::roundf(floating_point * (1 << Fixed::bits));
+}
+
+float Fixed::toFloat(void) const
+{
+	return ((float)this->RawBits / (float)(1 << Fixed::bits));
+}
+
+int Fixed::toInt(void) const
+{
+	return (this->RawBits >> Fixed::bits);
+}
+
+std::ostream	&operator<<(std::ostream &stream, Fixed const &fi)
+{
+	stream << fi.toFloat();
+	return (stream);
+}

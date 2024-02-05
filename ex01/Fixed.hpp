@@ -7,19 +7,21 @@
 class Fixed
 {
 private:
-	/* data */
+	int RawBits;
+	static const int bits = 8;
 public:
-	Fixed(/* args */);
+	Fixed();
+	Fixed(const Fixed &fixed);
+	Fixed(const int num);
+	Fixed(const float num);
 	~Fixed();
+	void setRawBits(const int bit);
+	int getRawBits(void) const;
+	int	toInt(void) const;
+	float toFloat(void) const;
+	Fixed &operator=(const Fixed &fi);
 };
 
-Fixed::Fixed(/* args */)
-{
-}
-
-Fixed::~Fixed()
-{
-}
-
+std::ostream &operator<<(std::ostream &stream ,const Fixed &fi);
 
 #endif

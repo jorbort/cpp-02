@@ -65,3 +65,103 @@ std::ostream	&operator<<(std::ostream &stream, Fixed const &fi)
 }
 
 //hasta aca todo igual que en el ex01
+
+bool	Fixed::operator>(Fixed const &fi) const
+{
+	return (this->RawBits > fi.getRawBits() ? true : false);
+}
+
+bool	Fixed::operator<(Fixed const &fi) const
+{
+	return (this->RawBits < fi.getRawBits() ? true : false);
+}
+
+bool	Fixed::operator>=(Fixed const &fi) const
+{
+	return (this->RawBits >= fi.getRawBits() ? true : false);
+}
+
+bool	Fixed::operator<=(Fixed const &fi) const
+{
+	return (this->RawBits <= fi.getRawBits() ? true : false);
+}
+
+bool	Fixed::operator==(Fixed const &fi) const
+{
+	return (this->RawBits == fi.getRawBits() ? true : false);
+}
+
+bool	Fixed::operator!=(Fixed const &fi) const
+{
+	return (this->RawBits != fi.getRawBits() ? true : false);
+}
+
+Fixed	Fixed::operator+(Fixed const &fi)
+{
+	this->RawBits += fi.getRawBits();
+	return (*this);
+}
+
+Fixed	Fixed::operator-(Fixed const &fi)
+{
+	this->RawBits -= fi.getRawBits();
+	return (*this);
+}
+
+Fixed Fixed::operator*(Fixed const &fi)
+{
+	this->RawBits = (this->toFloat() * fi.toFloat()) * (1 << bits);
+	return (*this);
+}
+
+Fixed Fixed::operator/(Fixed const &fi)
+{
+	this->RawBits = (this->toFloat() / fi.toFloat()) * (1 << bits);
+	return (*this);
+}
+
+Fixed Fixed::operator++()
+{
+	this->RawBits++;
+	return (*this);
+}
+
+Fixed Fixed::operator--()
+{
+	this->RawBits--;
+	return (*this);
+}
+
+Fixed Fixed::operator++(int)
+{
+	Fixed temp(*this);
+	++(*this);
+	return (temp);
+}
+
+Fixed Fixed::operator--(int)
+{
+	Fixed temp(*this);
+	--(*this);
+	return (temp);
+}
+
+Fixed const &Fixed::min(Fixed const &a, Fixed const &b)
+{
+	return (a.getRawBits() > b.getRawBits() ? b : a);
+}
+
+Fixed const &Fixed::max(Fixed const &a, Fixed const &b)
+{
+	return (a.getRawBits() < b.getRawBits() ? b : a);
+}
+
+Fixed &Fixed::min(Fixed &a, Fixed &b)
+{
+	return (a.getRawBits() > b.getRawBits() ? b : a);
+}
+
+Fixed &Fixed::max(Fixed &a, Fixed &b)
+{
+	return (a.getRawBits() < b.getRawBits() ? b : a);
+}
